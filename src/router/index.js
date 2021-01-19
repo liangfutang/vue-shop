@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
-// 导入全局样式
-import '../assets/css/global.css'
 
 Vue.use(VueRouter)
 
