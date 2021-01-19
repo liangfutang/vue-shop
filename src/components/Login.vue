@@ -6,7 +6,7 @@
           <img src="../assets/logo.png" alt="登录表格上面的图标">
         </div>
         <!-- 登录表单区 -->
-        <el-form :model="loginModel" :rules="loginFormRules" label-width="0px" class="login_form">
+        <el-form ref="loginFormRef" :model="loginModel" :rules="loginFormRules" label-width="0px" class="login_form">
           <!-- 用户名 -->
           <el-form-item prop="account">
             <el-input v-model="loginModel.account" prefix-icon="iconfont icon-zhanghao"></el-input>
@@ -18,7 +18,7 @@
           <!-- 登录重置按钮 -->
           <el-form-item class="btns">
             <el-button type="primary">登录</el-button>
-            <el-button type="primary">重置</el-button>
+            <el-button type="primary" @click="restLoginForm('loginFormRef')">重置</el-button>
           </el-form-item>
         </el-form>
     </div>
@@ -43,6 +43,11 @@ export default {
           { min: 3, max: 5, message: '密码长度在 3 到 5 个字符', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    restLoginForm (formName) {
+      this.$refs[formName].resetFields()
     }
   }
 }
