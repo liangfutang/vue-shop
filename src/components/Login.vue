@@ -6,14 +6,14 @@
           <img src="../assets/logo.png" alt="登录表格上面的图标">
         </div>
         <!-- 登录表单区 -->
-        <el-form label-width="0px" class="login_form">
+        <el-form :model="loginModel" label-width="0px" class="login_form">
           <!-- 用户名 -->
           <el-form-item>
-            <el-input prefix-icon="iconfont icon-zhanghao"></el-input>
+            <el-input v-model="loginModel.account" prefix-icon="iconfont icon-zhanghao"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item>
-            <el-input prefix-icon="iconfont icon-mima"></el-input>
+            <el-input v-model="loginModel.password" type="password" prefix-icon="iconfont icon-mima"></el-input>
           </el-form-item>
           <!-- 登录重置按钮 -->
           <el-form-item class="btns">
@@ -26,7 +26,16 @@
 </template>
 
 <script>
-export default { }
+export default {
+  data () {
+    return {
+      loginModel: {
+        account: '',
+        password: ''
+      }
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
