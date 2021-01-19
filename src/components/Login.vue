@@ -6,13 +6,13 @@
           <img src="../assets/logo.png" alt="登录表格上面的图标">
         </div>
         <!-- 登录表单区 -->
-        <el-form :model="loginModel" label-width="0px" class="login_form">
+        <el-form :model="loginModel" :rules="loginFormRules" label-width="0px" class="login_form">
           <!-- 用户名 -->
-          <el-form-item>
+          <el-form-item prop="account">
             <el-input v-model="loginModel.account" prefix-icon="iconfont icon-zhanghao"></el-input>
           </el-form-item>
           <!-- 密码 -->
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input v-model="loginModel.password" type="password" prefix-icon="iconfont icon-mima"></el-input>
           </el-form-item>
           <!-- 登录重置按钮 -->
@@ -32,6 +32,16 @@ export default {
       loginModel: {
         account: '',
         password: ''
+      },
+      loginFormRules: {
+        account: [
+          { required: true, message: '登录账号不能为空', trigger: 'blur' },
+          { min: 3, max: 5, message: '账号长度在 3 到 5 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '密码不能为空', trigger: 'blur' },
+          { min: 3, max: 5, message: '密码长度在 3 到 5 个字符', trigger: 'blur' }
+        ]
       }
     }
   }
