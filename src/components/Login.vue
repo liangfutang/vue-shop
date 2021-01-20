@@ -55,7 +55,9 @@ export default {
           return
         }
         const { data: res } = await this.$http.post('login', this.loginModel)
-        console.log('访问返回:' + res)
+        console.log('请求返回:')
+        console.log(res)
+        // 非200的业务失败
         if (res.meta.status !== 200) {
           return this.$message({
             showClose: true,
@@ -63,11 +65,16 @@ export default {
             type: 'error'
           })
         }
+        // 请求登录成功后消息提示
         this.$message({
           showClose: true,
           message: res.meta.msg,
           type: 'success'
         })
+        // 保存请求的token
+        window.sessionStorage.setItem('token', res.data.token)
+        // 编程时导航跳转到首页导航页
+        this.$router.push('/home')
       })
     }
   }
