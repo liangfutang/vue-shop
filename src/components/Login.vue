@@ -56,8 +56,18 @@ export default {
         }
         const { data: res } = await this.$http.post('login', this.loginModel)
         console.log('访问返回:' + res)
-        if (res.meta.status !== 200) return console.log('登录失败')
-        console.log('登录成功')
+        if (res.meta.status !== 200) {
+          return this.$message({
+            showClose: true,
+            message: res.meta.msg,
+            type: 'error'
+          })
+        }
+        this.$message({
+          showClose: true,
+          message: res.meta.msg,
+          type: 'success'
+        })
       })
     }
   }
