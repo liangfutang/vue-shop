@@ -17,7 +17,7 @@
           </el-form-item>
           <!-- 登录重置按钮 -->
           <el-form-item class="btns">
-            <el-button type="primary">登录</el-button>
+            <el-button type="primary" @click="doLogin('loginFormRef')">登录</el-button>
             <el-button type="primary" @click="restLoginForm('loginFormRef')">重置</el-button>
           </el-form-item>
         </el-form>
@@ -48,6 +48,17 @@ export default {
   methods: {
     restLoginForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    doLogin (loginInfo) {
+      this.$refs[loginInfo].validate(async valid => {
+        if (!valid) {
+          return
+        }
+        const { data: res } = await this.$http.post('login', this.loginModel)
+        console.log('访问返回:' + res)
+        if (res.meta.status !== 200) return console.log('登录失败')
+        console.log('登录成功')
+      })
     }
   }
 }
