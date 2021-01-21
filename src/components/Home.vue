@@ -23,5 +23,6 @@ export default {
 .loginOutButton {
     float: right;
     margin-top:10px;
+    margin-right:15px;
 }
 </style>
