@@ -8,8 +8,8 @@
         <!-- 登录表单区 -->
         <el-form ref="loginFormRef" :model="loginModel" :rules="loginFormRules" label-width="0px" class="login_form">
           <!-- 用户名 -->
-          <el-form-item prop="account">
-            <el-input v-model="loginModel.account" prefix-icon="iconfont icon-zhanghao"></el-input>
+          <el-form-item prop="loginName">
+            <el-input v-model="loginModel.loginName" prefix-icon="iconfont icon-zhanghao"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password">
@@ -30,17 +30,17 @@ export default {
   data () {
     return {
       loginModel: {
-        account: '',
+        loginName: '',
         password: ''
       },
       loginFormRules: {
-        account: [
+        loginName: [
           { required: true, message: '登录账号不能为空', trigger: 'blur' },
-          { min: 3, max: 5, message: '账号长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 3, max: 16, message: '账号长度在 3 到 16 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '密码不能为空', trigger: 'blur' },
-          { min: 3, max: 5, message: '密码长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 3, max: 16, message: '密码长度在 3 到 16 个字符', trigger: 'blur' }
         ]
       }
     }
@@ -57,18 +57,18 @@ export default {
         const { data: res } = await this.$http.post('login', this.loginModel)
         console.log('请求返回:')
         console.log(res)
-        // 非200的业务失败
-        if (res.meta.status !== 200) {
+        // 登录失败
+        if (res.code !== '3002') {
           return this.$message({
             showClose: true,
-            message: res.meta.msg,
+            message: res.message,
             type: 'error'
           })
         }
         // 请求登录成功后消息提示
         this.$message({
           showClose: true,
-          message: res.meta.msg,
+          message: res.message,
           type: 'success'
         })
         // 保存请求的token

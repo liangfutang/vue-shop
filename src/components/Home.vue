@@ -11,8 +11,7 @@
       <el-container>
         <!-- 左侧导航栏 -->
         <el-aside width="200px">
-          <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen"
-            @close="handleClose" background-color="#333744" text-color="#fff" active-text-color="#ffd04b">
+          <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#333744" text-color="#fff" active-text-color="#ffd04b">
             <!-- 导航一 -->
             <el-submenu index="1">
               <template slot="title">
